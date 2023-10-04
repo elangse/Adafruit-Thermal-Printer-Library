@@ -328,7 +328,13 @@ public:
     /*!
      * @brief Wakes device that was in sleep mode
      */
-    wake();
+    wake(),
+    /* Custom Feature */
+    /*
+     *@brief Cutting The Paper (ESCPOS)
+     */
+    fullCut(),
+    cut();
   bool
     /*!
      * @brief Whether or not the printer has paper
