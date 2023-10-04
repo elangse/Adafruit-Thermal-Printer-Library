@@ -420,30 +420,35 @@ void Adafruit_Thermal::setSize(char value) {
 
   switch (toupper(value)) {
   default: // Small: standard width and height
-    // size = 0x00;
-    // charHeight = 24;
-    // maxColumn = 32;
+    size = 0x00;
+    charHeight = 24;
+    maxColumn = 32;
     doubleWidthOff();
     doubleHeightOff();
     break;
   case 'M': // Medium: double height
-    // size = 0x01;
-    // charHeight = 48;
-    // maxColumn = 32;
+    size = 0x01;
+    charHeight = 48;
+    maxColumn = 32;
     doubleHeightOn();
     doubleWidthOff();
     break;
   case 'L': // Large: double width and height
-    // size = 0x11;
-    // charHeight = 48;
-    // maxColumn = 16;
+    size = 0x11;
+    charHeight = 48;
+    maxColumn = 16;
     doubleHeightOn();
     doubleWidthOn();
     break;
+  case 'B':
+    size = 0x23;
+    charHeight = 62;
+    maxColumn = 32;
+    break;
   }
 
-  // writeBytes(ASCII_GS, '!', size);
-  // prevByte = '\n'; // Setting the size adds a linefeed
+  writeBytes(ASCII_GS, '!', size);
+  prevByte = '\n'; // Setting the size adds a linefeed
 }
 
 // ESC 7 n1 n2 n3 Setting Control Parameter Command
@@ -701,3 +706,12 @@ void Adafruit_Thermal::setCharSpacing(int spacing) {
 }
 
 // -------------------------------------------------------------------------
+
+// Customize Function
+void Adafruit_Thermal::fullCut() {
+  writeBytes(ASCII_ESC, 'm');
+}
+
+void Adafruit_Thermal::cut() {
+  writeBytes(ASCII_ESC, 'm');
+}
